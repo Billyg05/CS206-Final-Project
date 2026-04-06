@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Speed\\Desktop\\school\\cs206\\HairSalonManagementApp\\HairSalonManagementApp\\HairSalonManagementApp\\HairSalonManagementApp.csproj": {}
+    "C:\\Users\\Speed\\Desktop\\school\\cs206\\5- final project\\HairSalonManagementApp\\HairSalonManagementApp\\HairSalonManagementApp\\HairSalonManagementApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Speed\\Desktop\\school\\cs206\\HairSalonManagementApp\\HairSalonManagementApp\\HairSalonManagementApp\\HairSalonManagementApp.csproj": {
+    "C:\\Users\\Speed\\Desktop\\school\\cs206\\5- final project\\HairSalonManagementApp\\HairSalonManagementApp\\HairSalonManagementApp\\HairSalonManagementApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Speed\\Desktop\\school\\cs206\\HairSalonManagementApp\\HairSalonManagementApp\\HairSalonManagementApp\\HairSalonManagementApp.csproj",
+        "projectUniqueName": "C:\\Users\\Speed\\Desktop\\school\\cs206\\5- final project\\HairSalonManagementApp\\HairSalonManagementApp\\HairSalonManagementApp\\HairSalonManagementApp.csproj",
         "projectName": "HairSalonManagementApp",
-        "projectPath": "C:\\Users\\Speed\\Desktop\\school\\cs206\\HairSalonManagementApp\\HairSalonManagementApp\\HairSalonManagementApp\\HairSalonManagementApp.csproj",
+        "projectPath": "C:\\Users\\Speed\\Desktop\\school\\cs206\\5- final project\\HairSalonManagementApp\\HairSalonManagementApp\\HairSalonManagementApp\\HairSalonManagementApp.csproj",
         "packagesPath": "C:\\Users\\Speed\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Speed\\Desktop\\school\\cs206\\HairSalonManagementApp\\HairSalonManagementApp\\HairSalonManagementApp\\obj\\",
+        "outputPath": "C:\\Users\\Speed\\Desktop\\school\\cs206\\5- final project\\HairSalonManagementApp\\HairSalonManagementApp\\HairSalonManagementApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
