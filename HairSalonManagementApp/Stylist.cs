@@ -1,6 +1,6 @@
 namespace HairSalonManagementApp
 {
-    internal class Stylist
+    public class Stylist
     {
         public int StylistId { get; set; }
         public string Name { get; set; } = "";
