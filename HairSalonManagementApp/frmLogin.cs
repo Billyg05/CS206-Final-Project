@@ -2,6 +2,7 @@ namespace HairSalonManagementApp
 {
     public partial class frmLogin : Form
     {
+        // Login form setup: wire the buttons once when the form opens
         public frmLogin()
         {
             InitializeComponent();
@@ -9,9 +10,26 @@ namespace HairSalonManagementApp
             btnExit.Click += btnExit_Click;
         }
 
+        // Login button: validate input, authenticate the employee, and open the dashboard
         private void btnLogin_Click(object? sender, EventArgs e)
         {
-            if (txtUsername.Text.Trim() == "admin" && txtPassword.Text == "salon123")
+            if (!Validator.TryGetUsername(txtUsername.Text, out string username, out string errorMessage))
+            {
+                Validator.ShowValidationError(errorMessage, txtUsername);
+                return;
+            }
+
+            string password = txtPassword.Text;
+
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                Validator.ShowValidationError("Enter the password.", txtPassword);
+                return;
+            }
+
+            Employee? employee = SalonDB.AuthenticateEmployee(username, password);
+
+            if (employee != null)
             {
                 Hide();
 
@@ -26,12 +44,13 @@ namespace HairSalonManagementApp
             }
             else
             {
-                MessageBox.Show("Use username admin and password salon123.", "Login Failed");
+                MessageBox.Show("Login failed. Check the username and password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtPassword.SelectAll();
                 txtPassword.Focus();
             }
         }
 
+        // Exit button: close the application from the login screen
         private void btnExit_Click(object? sender, EventArgs e)
         {
             Close();

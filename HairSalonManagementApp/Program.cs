@@ -2,16 +2,20 @@ namespace HairSalonManagementApp
 {
     internal static class Program
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
+        // Main startup: initialize WinForms, load saved data, and open the login form.
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
-            Application.Run(new frmLogin());
+            try
+            {
+                ApplicationConfiguration.Initialize();
+                SalonDB.Initialize();
+                Application.Run(new frmLogin());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("The program could not start.\r\n\r\n" + ex.Message, "Startup Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

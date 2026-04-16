@@ -12,8 +12,8 @@ namespace HairSalonManagementApp
         private Label label3;
         private Label label4;
         private TextBox txtSearch;
-        private TextBox txtFilterDate;
-        private TextBox txtFilterServices;
+        private ComboBox cmbFilterServices;
+        private DateTimePicker dtpFilterDate;
         private Button btnSearch;
         private Button btnReset;
         private DataGridView dgvAppointments;
@@ -49,228 +49,232 @@ namespace HairSalonManagementApp
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvAppointments = new System.Windows.Forms.DataGridView();
-            this.colAppointmentId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCustomer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colServices = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStylist = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            this.txtFilterDate = new System.Windows.Forms.TextBox();
-            this.txtFilterServices = new System.Windows.Forms.TextBox();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.btnReset = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnRefresh = new System.Windows.Forms.Button();
-            this.btnBack = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAppointments)).BeginInit();
-            this.SuspendLayout();
+            dgvAppointments = new DataGridView();
+            colAppointmentId = new DataGridViewTextBoxColumn();
+            colCustomer = new DataGridViewTextBoxColumn();
+            colServices = new DataGridViewTextBoxColumn();
+            colStylist = new DataGridViewTextBoxColumn();
+            colDate = new DataGridViewTextBoxColumn();
+            colPrice = new DataGridViewTextBoxColumn();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            label4 = new Label();
+            txtSearch = new TextBox();
+            cmbFilterServices = new ComboBox();
+            dtpFilterDate = new DateTimePicker();
+            btnSearch = new Button();
+            btnReset = new Button();
+            btnEdit = new Button();
+            btnDelete = new Button();
+            btnRefresh = new Button();
+            btnBack = new Button();
+            ((System.ComponentModel.ISupportInitialize)dgvAppointments).BeginInit();
+            SuspendLayout();
             // 
             // dgvAppointments
             // 
-            this.dgvAppointments.AllowUserToAddRows = false;
-            this.dgvAppointments.AllowUserToDeleteRows = false;
-            this.dgvAppointments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAppointments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colAppointmentId,
-            this.colCustomer,
-            this.colServices,
-            this.colStylist,
-            this.colDate,
-            this.colPrice});
-            this.dgvAppointments.Location = new System.Drawing.Point(25, 128);
-            this.dgvAppointments.Name = "dgvAppointments";
-            this.dgvAppointments.ReadOnly = true;
-            this.dgvAppointments.RowHeadersVisible = false;
-            this.dgvAppointments.Size = new System.Drawing.Size(630, 154);
-            this.dgvAppointments.TabIndex = 5;
+            dgvAppointments.AllowUserToAddRows = false;
+            dgvAppointments.AllowUserToDeleteRows = false;
+            dgvAppointments.AllowUserToResizeRows = false;
+            dgvAppointments.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvAppointments.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvAppointments.Columns.AddRange(new DataGridViewColumn[] { colAppointmentId, colCustomer, colServices, colStylist, colDate, colPrice });
+            dgvAppointments.Location = new Point(29, 171);
+            dgvAppointments.MultiSelect = false;
+            dgvAppointments.Name = "dgvAppointments";
+            dgvAppointments.ReadOnly = true;
+            dgvAppointments.RowHeadersVisible = false;
+            dgvAppointments.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvAppointments.Size = new Size(720, 205);
+            dgvAppointments.TabIndex = 6;
             // 
             // colAppointmentId
             // 
-            this.colAppointmentId.HeaderText = "Appointment ID";
-            this.colAppointmentId.Name = "colAppointmentId";
-            this.colAppointmentId.ReadOnly = true;
-            this.colAppointmentId.Width = 110;
+            colAppointmentId.FillWeight = 85F;
+            colAppointmentId.HeaderText = "Appointment ID";
+            colAppointmentId.Name = "colAppointmentId";
+            colAppointmentId.ReadOnly = true;
             // 
             // colCustomer
             // 
-            this.colCustomer.HeaderText = "Customer";
-            this.colCustomer.Name = "colCustomer";
-            this.colCustomer.ReadOnly = true;
-            this.colCustomer.Width = 105;
+            colCustomer.FillWeight = 110F;
+            colCustomer.HeaderText = "Customer";
+            colCustomer.Name = "colCustomer";
+            colCustomer.ReadOnly = true;
             // 
             // colServices
             // 
-            this.colServices.HeaderText = "Services";
-            this.colServices.Name = "colServices";
-            this.colServices.ReadOnly = true;
-            this.colServices.Width = 95;
+            colServices.FillWeight = 95F;
+            colServices.HeaderText = "Service";
+            colServices.Name = "colServices";
+            colServices.ReadOnly = true;
             // 
             // colStylist
             // 
-            this.colStylist.HeaderText = "Stylist";
-            this.colStylist.Name = "colStylist";
-            this.colStylist.ReadOnly = true;
-            this.colStylist.Width = 90;
+            colStylist.FillWeight = 90F;
+            colStylist.HeaderText = "Stylist";
+            colStylist.Name = "colStylist";
+            colStylist.ReadOnly = true;
             // 
             // colDate
             // 
-            this.colDate.HeaderText = "Date";
-            this.colDate.Name = "colDate";
-            this.colDate.ReadOnly = true;
-            this.colDate.Width = 120;
+            colDate.FillWeight = 120F;
+            colDate.HeaderText = "Date";
+            colDate.Name = "colDate";
+            colDate.ReadOnly = true;
             // 
             // colPrice
             // 
-            this.colPrice.HeaderText = "Price";
-            this.colPrice.Name = "colPrice";
-            this.colPrice.ReadOnly = true;
-            this.colPrice.Width = 80;
+            colPrice.FillWeight = 75F;
+            colPrice.HeaderText = "Price";
+            colPrice.Name = "colPrice";
+            colPrice.ReadOnly = true;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(286, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Manage Records";
+            label1.AutoSize = true;
+            label1.Location = new Point(327, 24);
+            label1.Name = "label1";
+            label1.Size = new Size(120, 20);
+            label1.TabIndex = 0;
+            label1.Text = "Manage Records";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(39, 55);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 15);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Search:";
+            label2.AutoSize = true;
+            label2.Location = new Point(45, 73);
+            label2.Name = "label2";
+            label2.Size = new Size(56, 20);
+            label2.TabIndex = 1;
+            label2.Text = "Search:";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(360, 55);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(84, 15);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Filter Services:";
+            label3.AutoSize = true;
+            label3.Location = new Point(411, 73);
+            label3.Name = "label3";
+            label3.Size = new Size(99, 20);
+            label3.TabIndex = 2;
+            label3.Text = "Filter Service:";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(39, 91);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(58, 15);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Filter Date:";
+            label4.AutoSize = true;
+            label4.Location = new Point(45, 121);
+            label4.Name = "label4";
+            label4.Size = new Size(81, 20);
+            label4.TabIndex = 3;
+            label4.Text = "Filter Date:";
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(96, 52);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(168, 23);
-            this.txtSearch.TabIndex = 0;
+            txtSearch.Location = new Point(110, 69);
+            txtSearch.MaxLength = 50;
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(191, 27);
+            txtSearch.TabIndex = 0;
             // 
-            // txtFilterDate
+            // cmbFilterServices
             // 
-            this.txtFilterDate.Location = new System.Drawing.Point(109, 88);
-            this.txtFilterDate.Name = "txtFilterDate";
-            this.txtFilterDate.Size = new System.Drawing.Size(155, 23);
-            this.txtFilterDate.TabIndex = 2;
+            cmbFilterServices.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbFilterServices.FormattingEnabled = true;
+            cmbFilterServices.Location = new Point(519, 69);
+            cmbFilterServices.Name = "cmbFilterServices";
+            cmbFilterServices.Size = new Size(177, 28);
+            cmbFilterServices.TabIndex = 1;
             // 
-            // txtFilterServices
+            // dtpFilterDate
             // 
-            this.txtFilterServices.Location = new System.Drawing.Point(454, 52);
-            this.txtFilterServices.Name = "txtFilterServices";
-            this.txtFilterServices.Size = new System.Drawing.Size(155, 23);
-            this.txtFilterServices.TabIndex = 1;
+            dtpFilterDate.Checked = false;
+            dtpFilterDate.Format = DateTimePickerFormat.Short;
+            dtpFilterDate.Location = new Point(135, 117);
+            dtpFilterDate.Name = "dtpFilterDate";
+            dtpFilterDate.ShowCheckBox = true;
+            dtpFilterDate.Size = new Size(166, 27);
+            dtpFilterDate.TabIndex = 2;
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(360, 86);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 27);
-            this.btnSearch.TabIndex = 3;
-            this.btnSearch.Text = "&Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Location = new Point(411, 115);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(86, 36);
+            btnSearch.TabIndex = 3;
+            btnSearch.Text = "&Search";
+            btnSearch.UseVisualStyleBackColor = true;
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(454, 86);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(75, 27);
-            this.btnReset.TabIndex = 4;
-            this.btnReset.Text = "&Reset";
-            this.btnReset.UseVisualStyleBackColor = true;
+            btnReset.Location = new Point(519, 115);
+            btnReset.Name = "btnReset";
+            btnReset.Size = new Size(86, 36);
+            btnReset.TabIndex = 4;
+            btnReset.Text = "&Reset";
+            btnReset.UseVisualStyleBackColor = true;
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(118, 303);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(75, 27);
-            this.btnEdit.TabIndex = 6;
-            this.btnEdit.Text = "&Edit";
-            this.btnEdit.UseVisualStyleBackColor = true;
+            btnEdit.Location = new Point(135, 404);
+            btnEdit.Name = "btnEdit";
+            btnEdit.Size = new Size(86, 36);
+            btnEdit.TabIndex = 7;
+            btnEdit.Text = "&Edit";
+            btnEdit.UseVisualStyleBackColor = true;
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(247, 303);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 27);
-            this.btnDelete.TabIndex = 7;
-            this.btnDelete.Text = "&Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Location = new Point(282, 404);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(86, 36);
+            btnDelete.TabIndex = 8;
+            btnDelete.Text = "&Delete";
+            btnDelete.UseVisualStyleBackColor = true;
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(376, 303);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(75, 27);
-            this.btnRefresh.TabIndex = 8;
-            this.btnRefresh.Text = "&Refresh";
-            this.btnRefresh.UseVisualStyleBackColor = true;
+            btnRefresh.Location = new Point(430, 404);
+            btnRefresh.Name = "btnRefresh";
+            btnRefresh.Size = new Size(86, 36);
+            btnRefresh.TabIndex = 9;
+            btnRefresh.Text = "&Refresh";
+            btnRefresh.UseVisualStyleBackColor = true;
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(505, 303);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(75, 27);
-            this.btnBack.TabIndex = 9;
-            this.btnBack.Text = "&Back";
-            this.btnBack.UseVisualStyleBackColor = true;
+            btnBack.Location = new Point(577, 404);
+            btnBack.Name = "btnBack";
+            btnBack.Size = new Size(86, 36);
+            btnBack.TabIndex = 10;
+            btnBack.Text = "&Back";
+            btnBack.UseVisualStyleBackColor = true;
             // 
             // frmManageRecords
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(681, 355);
-            this.Controls.Add(this.btnBack);
-            this.Controls.Add(this.btnRefresh);
-            this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.btnEdit);
-            this.Controls.Add(this.btnReset);
-            this.Controls.Add(this.btnSearch);
-            this.Controls.Add(this.txtFilterServices);
-            this.Controls.Add(this.txtFilterDate);
-            this.Controls.Add(this.txtSearch);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.dgvAppointments);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.Name = "frmManageRecords";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Manage Records";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAppointments)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(778, 473);
+            Controls.Add(btnBack);
+            Controls.Add(btnRefresh);
+            Controls.Add(btnDelete);
+            Controls.Add(btnEdit);
+            Controls.Add(btnReset);
+            Controls.Add(btnSearch);
+            Controls.Add(dtpFilterDate);
+            Controls.Add(cmbFilterServices);
+            Controls.Add(txtSearch);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(dgvAppointments);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            Name = "frmManageRecords";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Manage Records";
+            ((System.ComponentModel.ISupportInitialize)dgvAppointments).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

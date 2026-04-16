@@ -75,6 +75,7 @@ namespace HairSalonManagementApp
             // txtUsername
             // 
             this.txtUsername.Location = new System.Drawing.Point(101, 58);
+            this.txtUsername.MaxLength = 20;
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(132, 23);
             this.txtUsername.TabIndex = 0;
@@ -82,6 +83,7 @@ namespace HairSalonManagementApp
             // txtPassword
             // 
             this.txtPassword.Location = new System.Drawing.Point(101, 97);
+            this.txtPassword.MaxLength = 20;
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(132, 23);

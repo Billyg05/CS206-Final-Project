@@ -13,7 +13,7 @@ namespace HairSalonManagementApp
         private Label label4;
         private Label label5;
         private TextBox txtCustomerName;
-        private TextBox txtPhoneNumber;
+        private MaskedTextBox txtPhoneNumber;
         private TextBox txtEmail;
         private TextBox txtNotes;
         private Button btnSave;
@@ -47,7 +47,7 @@ namespace HairSalonManagementApp
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtCustomerName = new System.Windows.Forms.TextBox();
-            this.txtPhoneNumber = new System.Windows.Forms.TextBox();
+            this.txtPhoneNumber = new System.Windows.Forms.MaskedTextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtNotes = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
@@ -103,6 +103,7 @@ namespace HairSalonManagementApp
             // txtCustomerName
             // 
             this.txtCustomerName.Location = new System.Drawing.Point(142, 55);
+            this.txtCustomerName.MaxLength = 50;
             this.txtCustomerName.Name = "txtCustomerName";
             this.txtCustomerName.Size = new System.Drawing.Size(176, 23);
             this.txtCustomerName.TabIndex = 0;
@@ -110,13 +111,16 @@ namespace HairSalonManagementApp
             // txtPhoneNumber
             // 
             this.txtPhoneNumber.Location = new System.Drawing.Point(142, 91);
+            this.txtPhoneNumber.Mask = "(000) 000-0000";
             this.txtPhoneNumber.Name = "txtPhoneNumber";
             this.txtPhoneNumber.Size = new System.Drawing.Size(176, 23);
             this.txtPhoneNumber.TabIndex = 1;
+            this.txtPhoneNumber.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals;
             // 
             // txtEmail
             // 
             this.txtEmail.Location = new System.Drawing.Point(142, 127);
+            this.txtEmail.MaxLength = 80;
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(176, 23);
             this.txtEmail.TabIndex = 2;
@@ -124,6 +128,7 @@ namespace HairSalonManagementApp
             // txtNotes
             // 
             this.txtNotes.Location = new System.Drawing.Point(142, 163);
+            this.txtNotes.MaxLength = 200;
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
             this.txtNotes.Size = new System.Drawing.Size(176, 73);
@@ -160,6 +165,8 @@ namespace HairSalonManagementApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AcceptButton = this.btnSave;
+            this.CancelButton = this.btnBack;
             this.ClientSize = new System.Drawing.Size(359, 310);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnClear);

@@ -2,6 +2,7 @@ namespace HairSalonManagementApp
 {
     public partial class frmReports : Form
     {
+        // Reports form setup: wire buttons and load the summary data right away.
         public frmReports()
         {
             InitializeComponent();
@@ -11,6 +12,7 @@ namespace HairSalonManagementApp
             LoadReportData();
         }
 
+        // Fill the report labels and list box with the latest totals.
         private void LoadReportData()
         {
             lblCustomers.Text = SalonDB.Customers.Count.ToString();
@@ -26,11 +28,13 @@ namespace HairSalonManagementApp
             }
         }
 
+        // Refresh button: reload the report values from storage.
         private void btnRefresh_Click(object? sender, EventArgs e)
         {
             LoadReportData();
         }
 
+        // Close button: exit the reports form.
         private void btnClose_Click(object? sender, EventArgs e)
         {
             Close();

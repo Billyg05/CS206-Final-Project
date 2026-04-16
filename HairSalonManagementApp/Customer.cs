@@ -8,10 +8,12 @@ namespace HairSalonManagementApp
         public string Email { get; set; } = "";
         public string Notes { get; set; } = "";
 
+        // Empty constructor for object initializers and file loading.
         public Customer()
         {
         }
 
+        // Constructor used when a full customer record is loaded from storage.
         public Customer(int customerId, string fullName, string phoneNumber, string email, string notes)
         {
             CustomerId = customerId;
@@ -21,9 +23,10 @@ namespace HairSalonManagementApp
             Notes = notes;
         }
 
+        // Display text used in customer drop-down lists.
         public override string ToString()
         {
-            return FullName;
+            return FullName + " - " + PhoneNumber;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace HairSalonManagementApp
 
         private Label label1;
         private Button btnAddCustomer;
-        private Button btnAddService;
+        private Button btnAddEmployee;
         private Button btnBookAppointment;
         private Button btnManageRecords;
         private Button btnReports;
@@ -44,185 +44,192 @@ namespace HairSalonManagementApp
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnAddCustomer = new System.Windows.Forms.Button();
-            this.btnAddService = new System.Windows.Forms.Button();
-            this.btnBookAppointment = new System.Windows.Forms.Button();
-            this.btnManageRecords = new System.Windows.Forms.Button();
-            this.btnReports = new System.Windows.Forms.Button();
-            this.btnLogout = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lblCustomerCount = new System.Windows.Forms.Label();
-            this.lblAppointmentCount = new System.Windows.Forms.Label();
-            this.lblTodayCount = new System.Windows.Forms.Label();
-            this.lblRevenue = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            label1 = new Label();
+            btnAddCustomer = new Button();
+            btnAddEmployee = new Button();
+            btnBookAppointment = new Button();
+            btnManageRecords = new Button();
+            btnReports = new Button();
+            btnLogout = new Button();
+            label2 = new Label();
+            label3 = new Label();
+            label4 = new Label();
+            label5 = new Label();
+            lblCustomerCount = new Label();
+            lblAppointmentCount = new Label();
+            lblTodayCount = new Label();
+            lblRevenue = new Label();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(157, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Dashboard";
+            label1.AutoSize = true;
+            label1.Location = new Point(179, 24);
+            label1.Name = "label1";
+            label1.Size = new Size(82, 20);
+            label1.TabIndex = 0;
+            label1.Text = "Dashboard";
             // 
             // btnAddCustomer
             // 
-            this.btnAddCustomer.Location = new System.Drawing.Point(35, 56);
-            this.btnAddCustomer.Name = "btnAddCustomer";
-            this.btnAddCustomer.Size = new System.Drawing.Size(95, 30);
-            this.btnAddCustomer.TabIndex = 0;
-            this.btnAddCustomer.Text = "Add customer";
-            this.btnAddCustomer.UseVisualStyleBackColor = true;
+            btnAddCustomer.Location = new Point(40, 75);
+            btnAddCustomer.Margin = new Padding(3, 4, 3, 4);
+            btnAddCustomer.Name = "btnAddCustomer";
+            btnAddCustomer.Size = new Size(109, 40);
+            btnAddCustomer.TabIndex = 0;
+            btnAddCustomer.Text = "Add customer";
+            btnAddCustomer.UseVisualStyleBackColor = true;
             // 
-            // btnAddService
+            // btnAddEmployee
             // 
-            this.btnAddService.Location = new System.Drawing.Point(143, 56);
-            this.btnAddService.Name = "btnAddService";
-            this.btnAddService.Size = new System.Drawing.Size(95, 30);
-            this.btnAddService.TabIndex = 1;
-            this.btnAddService.Text = "Add service";
-            this.btnAddService.UseVisualStyleBackColor = true;
+            btnAddEmployee.Location = new Point(163, 75);
+            btnAddEmployee.Margin = new Padding(3, 4, 3, 4);
+            btnAddEmployee.Name = "btnAddEmployee";
+            btnAddEmployee.Size = new Size(109, 40);
+            btnAddEmployee.TabIndex = 1;
+            btnAddEmployee.Text = "Add employee";
+            btnAddEmployee.UseVisualStyleBackColor = true;
             // 
             // btnBookAppointment
             // 
-            this.btnBookAppointment.Location = new System.Drawing.Point(251, 56);
-            this.btnBookAppointment.Name = "btnBookAppointment";
-            this.btnBookAppointment.Size = new System.Drawing.Size(95, 30);
-            this.btnBookAppointment.TabIndex = 2;
-            this.btnBookAppointment.Text = "Book Apt";
-            this.btnBookAppointment.UseVisualStyleBackColor = true;
+            btnBookAppointment.Location = new Point(287, 75);
+            btnBookAppointment.Margin = new Padding(3, 4, 3, 4);
+            btnBookAppointment.Name = "btnBookAppointment";
+            btnBookAppointment.Size = new Size(109, 40);
+            btnBookAppointment.TabIndex = 2;
+            btnBookAppointment.Text = "Book Apt";
+            btnBookAppointment.UseVisualStyleBackColor = true;
             // 
             // btnManageRecords
             // 
-            this.btnManageRecords.Location = new System.Drawing.Point(35, 95);
-            this.btnManageRecords.Name = "btnManageRecords";
-            this.btnManageRecords.Size = new System.Drawing.Size(95, 30);
-            this.btnManageRecords.TabIndex = 3;
-            this.btnManageRecords.Text = "Manage records";
-            this.btnManageRecords.UseVisualStyleBackColor = true;
+            btnManageRecords.Location = new Point(40, 127);
+            btnManageRecords.Margin = new Padding(3, 4, 3, 4);
+            btnManageRecords.Name = "btnManageRecords";
+            btnManageRecords.Size = new Size(109, 40);
+            btnManageRecords.TabIndex = 3;
+            btnManageRecords.Text = "Manage records";
+            btnManageRecords.UseVisualStyleBackColor = true;
             // 
             // btnReports
             // 
-            this.btnReports.Location = new System.Drawing.Point(143, 95);
-            this.btnReports.Name = "btnReports";
-            this.btnReports.Size = new System.Drawing.Size(95, 30);
-            this.btnReports.TabIndex = 4;
-            this.btnReports.Text = "Reports";
-            this.btnReports.UseVisualStyleBackColor = true;
+            btnReports.Location = new Point(163, 127);
+            btnReports.Margin = new Padding(3, 4, 3, 4);
+            btnReports.Name = "btnReports";
+            btnReports.Size = new Size(109, 40);
+            btnReports.TabIndex = 4;
+            btnReports.Text = "Reports";
+            btnReports.UseVisualStyleBackColor = true;
             // 
             // btnLogout
             // 
-            this.btnLogout.Location = new System.Drawing.Point(251, 95);
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(95, 30);
-            this.btnLogout.TabIndex = 5;
-            this.btnLogout.Text = "Logout";
-            this.btnLogout.UseVisualStyleBackColor = true;
+            btnLogout.Location = new Point(287, 127);
+            btnLogout.Margin = new Padding(3, 4, 3, 4);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Size = new Size(109, 40);
+            btnLogout.TabIndex = 5;
+            btnLogout.Text = "Logout";
+            btnLogout.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(37, 161);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(91, 15);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Total Customers:";
+            label2.AutoSize = true;
+            label2.Location = new Point(42, 215);
+            label2.Name = "label2";
+            label2.Size = new Size(118, 20);
+            label2.TabIndex = 7;
+            label2.Text = "Total Customers:";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(37, 193);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(104, 15);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Total Appointments:";
+            label3.AutoSize = true;
+            label3.Location = new Point(42, 257);
+            label3.Name = "label3";
+            label3.Size = new Size(143, 20);
+            label3.TabIndex = 8;
+            label3.Text = "Total Appointments:";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(37, 225);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(117, 15);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Today's Appointments:";
+            label4.AutoSize = true;
+            label4.Location = new Point(42, 300);
+            label4.Name = "label4";
+            label4.Size = new Size(159, 20);
+            label4.TabIndex = 9;
+            label4.Text = "Today's Appointments:";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(37, 257);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(77, 15);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Total Revenue:";
+            label5.AutoSize = true;
+            label5.Location = new Point(42, 343);
+            label5.Name = "label5";
+            label5.Size = new Size(105, 20);
+            label5.TabIndex = 10;
+            label5.Text = "Total Revenue:";
             // 
             // lblCustomerCount
             // 
-            this.lblCustomerCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblCustomerCount.Location = new System.Drawing.Point(179, 157);
-            this.lblCustomerCount.Name = "lblCustomerCount";
-            this.lblCustomerCount.Size = new System.Drawing.Size(84, 23);
-            this.lblCustomerCount.TabIndex = 11;
-            this.lblCustomerCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            lblCustomerCount.BorderStyle = BorderStyle.FixedSingle;
+            lblCustomerCount.Location = new Point(205, 209);
+            lblCustomerCount.Name = "lblCustomerCount";
+            lblCustomerCount.Size = new Size(96, 30);
+            lblCustomerCount.TabIndex = 11;
+            lblCustomerCount.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblAppointmentCount
             // 
-            this.lblAppointmentCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblAppointmentCount.Location = new System.Drawing.Point(179, 189);
-            this.lblAppointmentCount.Name = "lblAppointmentCount";
-            this.lblAppointmentCount.Size = new System.Drawing.Size(84, 23);
-            this.lblAppointmentCount.TabIndex = 12;
-            this.lblAppointmentCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            lblAppointmentCount.BorderStyle = BorderStyle.FixedSingle;
+            lblAppointmentCount.Location = new Point(205, 252);
+            lblAppointmentCount.Name = "lblAppointmentCount";
+            lblAppointmentCount.Size = new Size(96, 30);
+            lblAppointmentCount.TabIndex = 12;
+            lblAppointmentCount.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblTodayCount
             // 
-            this.lblTodayCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblTodayCount.Location = new System.Drawing.Point(179, 221);
-            this.lblTodayCount.Name = "lblTodayCount";
-            this.lblTodayCount.Size = new System.Drawing.Size(84, 23);
-            this.lblTodayCount.TabIndex = 13;
-            this.lblTodayCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            lblTodayCount.BorderStyle = BorderStyle.FixedSingle;
+            lblTodayCount.Location = new Point(205, 295);
+            lblTodayCount.Name = "lblTodayCount";
+            lblTodayCount.Size = new Size(96, 30);
+            lblTodayCount.TabIndex = 13;
+            lblTodayCount.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblRevenue
             // 
-            this.lblRevenue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblRevenue.Location = new System.Drawing.Point(179, 253);
-            this.lblRevenue.Name = "lblRevenue";
-            this.lblRevenue.Size = new System.Drawing.Size(84, 23);
-            this.lblRevenue.TabIndex = 14;
-            this.lblRevenue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            lblRevenue.BorderStyle = BorderStyle.FixedSingle;
+            lblRevenue.Location = new Point(205, 337);
+            lblRevenue.Name = "lblRevenue";
+            lblRevenue.Size = new Size(96, 30);
+            lblRevenue.TabIndex = 14;
+            lblRevenue.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // frmDashboard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(382, 304);
-            this.Controls.Add(this.lblRevenue);
-            this.Controls.Add(this.lblTodayCount);
-            this.Controls.Add(this.lblAppointmentCount);
-            this.Controls.Add(this.lblCustomerCount);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnLogout);
-            this.Controls.Add(this.btnReports);
-            this.Controls.Add(this.btnManageRecords);
-            this.Controls.Add(this.btnBookAppointment);
-            this.Controls.Add(this.btnAddService);
-            this.Controls.Add(this.btnAddCustomer);
-            this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.Name = "frmDashboard";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Dashboard";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(437, 405);
+            Controls.Add(lblRevenue);
+            Controls.Add(lblTodayCount);
+            Controls.Add(lblAppointmentCount);
+            Controls.Add(lblCustomerCount);
+            Controls.Add(label5);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(btnLogout);
+            Controls.Add(btnReports);
+            Controls.Add(btnManageRecords);
+            Controls.Add(btnBookAppointment);
+            Controls.Add(btnAddEmployee);
+            Controls.Add(btnAddCustomer);
+            Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            Margin = new Padding(3, 4, 3, 4);
+            MaximizeBox = false;
+            Name = "frmDashboard";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Dashboard";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
