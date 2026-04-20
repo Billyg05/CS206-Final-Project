@@ -2,7 +2,7 @@ namespace HairSalonManagementApp
 {
     public partial class frmAddCustomer : Form
     {
-        // Customer form setup: wire the buttons used for add-entry workflow.
+        // form setup
         public frmAddCustomer()
         {
             InitializeComponent();
@@ -11,7 +11,7 @@ namespace HairSalonManagementApp
             btnBack.Click += btnBack_Click;
         }
 
-        // Save button: validate the fields and store the customer record.
+        // save click
         private void btnSave_Click(object? sender, EventArgs e)
         {
             if (!Validator.TryGetCustomerName(txtCustomerName.Text, out string customerName, out string errorMessage))
@@ -58,19 +58,19 @@ namespace HairSalonManagementApp
             }
         }
 
-        // Clear button: empty the inputs so a new customer can be entered.
+        // clear click
         private void btnClear_Click(object? sender, EventArgs e)
         {
             ClearForm();
         }
 
-        // Back button: close the customer form without saving anything else.
+        // back click
         private void btnBack_Click(object? sender, EventArgs e)
         {
             Close();
         }
 
-        // Reset every customer input back to its default blank state.
+        // clear form
         private void ClearForm()
         {
             txtCustomerName.Clear();

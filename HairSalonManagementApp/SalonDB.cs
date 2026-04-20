@@ -18,9 +18,8 @@ namespace HairSalonManagementApp
         public static List<Service> Services { get; } = new();
         public static List<Stylist> Stylists { get; } = new();
         public static List<Appointment> Appointments { get; } = new();
-        public static string[] ServiceCategories { get; } = new[] { "Cut", "Color", "Style", "Treatment", "Other" };
 
-        // startup load; reads lists and seeds defaults
+        // init data
         public static void Initialize()
         {
             if (_isInitialized)
@@ -40,43 +39,43 @@ namespace HairSalonManagementApp
             _isInitialized = true;
         }
 
-        // Generate customer ID
+        // next customer id
         public static int GetNextCustomerId()
         {
             return Customers.Count == 0 ? 1001 : Customers.Max(c => c.CustomerId) + 1;
         }
 
-        // Generateemployee ID
+        // next employee id
         public static int GetNextEmployeeId()
         {
             return Employees.Count == 0 ? 501 : Employees.Max(e => e.EmployeeId) + 1;
         }
 
-        // Generate service ID
+        // next service id
         public static int GetNextServiceId()
         {
             return Services.Count == 0 ? 2001 : Services.Max(s => s.ServiceId) + 1;
         }
 
-        // Generate stylist ID
+        // next stylist id
         public static int GetNextStylistId()
         {
             return Stylists.Count == 0 ? 3001 : Stylists.Max(s => s.StylistId) + 1;
         }
 
-        // Generate appointment ID
+        // next appointment id
         public static int GetNextAppointmentId()
         {
             return Appointments.Count == 0 ? 4001 : Appointments.Max(a => a.AppointmentId) + 1;
         }
 
-        // Look up customer by ID.
+        // customer lookup
         public static Customer? GetCustomerById(int customerId)
         {
             return Customers.FirstOrDefault(c => c.CustomerId == customerId);
         }
 
-        // Look up employee account by username for login.
+        // employee lookup
         public static Employee? GetEmployeeByUsername(string username)
         {
             return Employees.FirstOrDefault(e =>
@@ -84,19 +83,19 @@ namespace HairSalonManagementApp
                 string.Equals(e.Username, username.Trim(), StringComparison.OrdinalIgnoreCase));
         }
 
-        // Look up service by ID.
+        // service lookup
         public static Service? GetServiceById(int serviceId)
         {
             return Services.FirstOrDefault(s => s.ServiceId == serviceId);
         }
 
-        // Look up stylist by ID.
+        // stylist lookup
         public static Stylist? GetStylistById(int stylistId)
         {
             return Stylists.FirstOrDefault(s => s.StylistId == stylistId);
         }
 
-        // Return customers for combo boxes.
+        // customer list
         public static List<Customer> GetCustomersForSelection()
         {
             return Customers
@@ -105,7 +104,7 @@ namespace HairSalonManagementApp
                 .ToList();
         }
 
-        // Return services for combo boxes.
+        // service list
         public static List<Service> GetServicesForSelection()
         {
             return Services
@@ -114,7 +113,7 @@ namespace HairSalonManagementApp
                 .ToList();
         }
 
-        // Return stylists for appointment booking.
+        // active stylists
         public static List<Stylist> GetActiveStylists()
         {
             return Stylists
@@ -123,7 +122,7 @@ namespace HairSalonManagementApp
                 .ToList();
         }
 
-        // Add a new customer or update an existing one, while blocking duplicates.
+        // save customer
         public static void SaveCustomer(Customer customer)
         {
             if (customer == null)
@@ -159,7 +158,7 @@ namespace HairSalonManagementApp
             SaveCustomers();
         }
 
-        // Add a new employee account and store only the salted password hash (no plain text password in files)
+        // save employee
         public static void SaveEmployee(Employee employee, string plainTextPassword)
         {
             if (employee == null)
@@ -176,7 +175,6 @@ namespace HairSalonManagementApp
                 throw new InvalidOperationException("That username is already in use.");
             }
 
-            // Each password gets salt so the same password will not hash to the same value (secure coding)
             string salt = CreateSalt();
             string hash = HashPassword(plainTextPassword, salt);
 
@@ -202,42 +200,7 @@ namespace HairSalonManagementApp
             SaveEmployees();
         }
 
-        // Add a new service or update an existing one, while blocking duplicate names
-        public static void SaveService(Service service)
-        {
-            if (service == null)
-            {
-                throw new InvalidOperationException("Service data is missing.");
-            }
-
-            bool duplicateService = Services.Any(s =>
-                s.ServiceId != service.ServiceId &&
-                NormalizeKey(s.ServiceName) == NormalizeKey(service.ServiceName));
-
-            if (duplicateService)
-            {
-                throw new InvalidOperationException("A service with the same name already exists.");
-            }
-
-            Service? existingService = Services.FirstOrDefault(s => s.ServiceId == service.ServiceId);
-
-            if (existingService == null)
-            {
-                service.ServiceId = GetNextServiceId();
-                Services.Add(service);
-            }
-            else
-            {
-                existingService.ServiceName = service.ServiceName;
-                existingService.Price = service.Price;
-                existingService.Category = service.Category;
-                existingService.Description = service.Description;
-            }
-
-            SaveServices();
-        }
-
-        // Check password against salted hash
+        // check login
         public static Employee? AuthenticateEmployee(string username, string password)
         {
             Employee? employee = GetEmployeeByUsername(username);
@@ -253,7 +216,7 @@ namespace HairSalonManagementApp
                 byte[] providedHash = Convert.FromBase64String(hash);
                 byte[] storedHash = Convert.FromBase64String(employee.PasswordHash);
 
-                // Security thing? 
+                // fixed time compare
                 return CryptographicOperations.FixedTimeEquals(providedHash, storedHash) ? employee : null;
             }
             catch
@@ -262,7 +225,7 @@ namespace HairSalonManagementApp
             }
         }
 
-        // Add a new or update appointment.
+        // save appointment
         public static void SaveAppointment(Appointment appointment)
         {
             if (appointment == null)
@@ -283,6 +246,26 @@ namespace HairSalonManagementApp
             if (GetStylistById(appointment.StylistId) == null)
             {
                 throw new InvalidOperationException("Select a valid stylist.");
+            }
+
+            bool stylistConflict = Appointments.Any(a =>
+                a.AppointmentId != appointment.AppointmentId &&
+                a.StylistId == appointment.StylistId &&
+                a.AppointmentDate == appointment.AppointmentDate);
+
+            if (stylistConflict)
+            {
+                throw new InvalidOperationException("That stylist already has an appointment at the selected date and time.");
+            }
+
+            bool customerConflict = Appointments.Any(a =>
+                a.AppointmentId != appointment.AppointmentId &&
+                a.CustomerId == appointment.CustomerId &&
+                a.AppointmentDate == appointment.AppointmentDate);
+
+            if (customerConflict)
+            {
+                throw new InvalidOperationException("That customer already has an appointment at the selected date and time.");
             }
 
             Appointment? existingAppointment = Appointments.FirstOrDefault(a => a.AppointmentId == appointment.AppointmentId);
@@ -306,7 +289,7 @@ namespace HairSalonManagementApp
             SaveAppointments();
         }
 
-        // Remove appointment from list and save
+        // delete appointment
         public static void DeleteAppointment(int appointmentId)
         {
             Appointment? appointment = Appointments.FirstOrDefault(a => a.AppointmentId == appointmentId);
@@ -318,13 +301,13 @@ namespace HairSalonManagementApp
             }
         }
 
-        // Look up appointment by ID.
+        // appointment lookup
         public static Appointment? GetAppointmentById(int appointmentId)
         {
             return Appointments.FirstOrDefault(a => a.AppointmentId == appointmentId);
         }
 
-        // Search appointments by text and filters.
+        // search appointments
         public static List<Appointment> SearchAppointments(string searchText, int? serviceId, DateTime? filterDate)
         {
             IEnumerable<Appointment> query = Appointments.OrderBy(a => a.AppointmentDate);
@@ -353,40 +336,40 @@ namespace HairSalonManagementApp
             return query.ToList();
         }
 
-        // Get customer name from ID
+        // customer name
         public static string GetCustomerName(int customerId)
         {
             Customer? customer = GetCustomerById(customerId);
             return customer == null ? string.Empty : customer.FullName;
         }
 
-        // Get service name from ID
+        // service name
         public static string GetServiceName(int serviceId)
         {
             Service? service = GetServiceById(serviceId);
             return service == null ? string.Empty : service.ServiceName;
         }
 
-        // Get stylist name from ID
+        // stylist name
         public static string GetStylistName(int stylistId)
         {
             Stylist? stylist = GetStylistById(stylistId);
             return stylist == null ? string.Empty : stylist.Name;
         }
 
-        // Count today's appointments for the dashboard textbox
+        // today count
         public static int GetTodayAppointmentCount()
         {
             return Appointments.Count(a => a.AppointmentDate.Date == DateTime.Today);
         }
 
-        // Add appointment prices for dashboard and reports
+        // total revenue
         public static decimal GetTotalRevenue()
         {
             return Appointments.Sum(a => a.TotalCost);
         }
 
-        // Find most-booked service for report screen
+        // top service
         public static string GetTopServiceName()
         {
             var topService = Appointments
@@ -397,7 +380,7 @@ namespace HairSalonManagementApp
             return topService == null ? "N/A" : GetServiceName(topService.Key);
         }
 
-        // Build simple "service: count" lines for report list box
+        // report lines
         public static List<string> GetReportLines()
         {
             return Services
@@ -412,23 +395,24 @@ namespace HairSalonManagementApp
                 .ToList();
         }
 
-        // Seed the default login and starter data for first-time runs
+        // seed defaults
         private static void SeedDefaults()
         {
             if (Employees.Count == 0)
             {
-                // Seed admin account so the app has a first login (convenient but should be removed for security LOL)
-                string salt = CreateSalt();
-                string hash = HashPassword("Salon123", salt);
-                Employees.Add(new Employee(GetNextEmployeeId(), "Administrator", "admin", salt, hash, true));
+                string adminSalt = CreateSalt();
+                string adminHash = HashPassword("Salon123", adminSalt);
+
+                Employees.Add(new Employee(GetNextEmployeeId(), "Administrator", "admin", adminSalt, adminHash, true));
                 SaveEmployees();
             }
 
             if (Services.Count == 0)
             {
-                Services.Add(new Service(GetNextServiceId(), "Haircut", 25.00m, "Cut", "Basic haircut service."));
-                Services.Add(new Service(GetNextServiceId(), "Color", 55.00m, "Color", "Single-process hair color."));
-                Services.Add(new Service(GetNextServiceId(), "Shampoo and Style", 30.00m, "Style", "Wash and styling service."));
+                Services.Add(new Service(GetNextServiceId(), "Haircut", 25.00m, "Cut", "Basic haircut"));
+                Services.Add(new Service(GetNextServiceId(), "Beard Trim", 18.00m, "Cut", "Basic beard trim"));
+                Services.Add(new Service(GetNextServiceId(), "Color", 55.00m, "Color", "Single process color"));
+                Services.Add(new Service(GetNextServiceId(), "Shampoo and Style", 30.00m, "Style", "Wash and style"));
                 SaveServices();
             }
 
@@ -439,9 +423,46 @@ namespace HairSalonManagementApp
                 Stylists.Add(new Stylist(GetNextStylistId(), "Alex", "Style", true));
                 SaveStylists();
             }
+
+            if (Customers.Count == 0)
+            {
+                Customers.Add(new Customer(GetNextCustomerId(), "Timmy", "(555) 123-4567", "timmy@example.com", string.Empty));
+                Customers.Add(new Customer(GetNextCustomerId(), "Jimmy", "(555) 987-6543", "jimmy@example.com", string.Empty));
+                SaveCustomers();
+            }
+
+            if (Appointments.Count == 0 && Customers.Count > 0 && Services.Count > 0 && Stylists.Count > 0)
+            {
+                Service haircutService = Services.First(s => s.ServiceName == "Haircut");
+                Service colorService = Services.First(s => s.ServiceName == "Color");
+                Stylist taylor = Stylists.First(s => s.Name == "Taylor");
+                Stylist jordan = Stylists.First(s => s.Name == "Jordan");
+
+                Appointments.Add(new Appointment(
+                    GetNextAppointmentId(),
+                    Customers[0].CustomerId,
+                    haircutService.ServiceId,
+                    taylor.StylistId,
+                    DateTime.Today.AddDays(1).AddHours(10),
+                    "Scheduled",
+                    haircutService.Price,
+                    string.Empty));
+
+                Appointments.Add(new Appointment(
+                    GetNextAppointmentId(),
+                    Customers[1].CustomerId,
+                    colorService.ServiceId,
+                    jordan.StylistId,
+                    DateTime.Today.AddDays(2).AddHours(14),
+                    "Scheduled",
+                    colorService.Price,
+                    string.Empty));
+
+                SaveAppointments();
+            }
         }
 
-        // Load employee accounts from text file
+        // load employees
         private static void LoadEmployees()
         {
             Employees.Clear();
@@ -469,13 +490,12 @@ namespace HairSalonManagementApp
                 }
                 catch
                 {
-                    // Skip bad lines so no crashes
                     continue;
                 }
             }
         }
 
-        // Load customers from text file
+        // load customers
         private static void LoadCustomers()
         {
             Customers.Clear();
@@ -507,7 +527,7 @@ namespace HairSalonManagementApp
             }
         }
 
-        // Load services from text file
+        // load services
         private static void LoadServices()
         {
             Services.Clear();
@@ -539,7 +559,7 @@ namespace HairSalonManagementApp
             }
         }
 
-        // Load stylists from file
+        // load stylists
         private static void LoadStylists()
         {
             Stylists.Clear();
@@ -570,7 +590,7 @@ namespace HairSalonManagementApp
             }
         }
 
-        // Load appointments from file
+        // load appointments
         private static void LoadAppointments()
         {
             Appointments.Clear();
@@ -605,7 +625,7 @@ namespace HairSalonManagementApp
             }
         }
 
-        // Write full customer list to the customer file
+        // save customers
         private static void SaveCustomers()
         {
             File.WriteAllLines(CustomerFile, Customers.Select(c =>
@@ -616,7 +636,7 @@ namespace HairSalonManagementApp
                 Escape(c.Notes)));
         }
 
-        // Write full employee list back to employee file.
+        // save employees
         private static void SaveEmployees()
         {
             File.WriteAllLines(EmployeeFile, Employees.Select(e =>
@@ -628,7 +648,7 @@ namespace HairSalonManagementApp
                 e.IsActive.ToString()));
         }
 
-        // Write full service list back to service file.
+        // save services
         private static void SaveServices()
         {
             File.WriteAllLines(ServiceFile, Services.Select(s =>
@@ -639,7 +659,7 @@ namespace HairSalonManagementApp
                 Escape(s.Description)));
         }
 
-        // Write full stylist list back to stylist file.
+        // save stylists
         private static void SaveStylists()
         {
             File.WriteAllLines(StylistFile, Stylists.Select(s =>
@@ -649,7 +669,7 @@ namespace HairSalonManagementApp
                 s.IsActive.ToString()));
         }
 
-        // Write full appointment list back to appointment file.
+        // save appointments
         private static void SaveAppointments()
         {
             File.WriteAllLines(AppointmentFile, Appointments.Select(a =>
@@ -663,38 +683,38 @@ namespace HairSalonManagementApp
                 Escape(a.Notes)));
         }
 
-        // Clean tabs and line breaks out of saved text fields so file parsing doesnt blow up
+        // escape text
         private static string Escape(string value)
         {
             return value.Replace("\t", " ").Replace("\r", " ").Replace("\n", " ");
         }
 
-        // unescape method kept for symmetry with Escape.
+        // unescape text
         private static string Unescape(string value)
         {
             return value;
         }
 
-        // Normalize text for duplicate checks
+        // normalize text
         private static string NormalizeKey(string value)
         {
             return value.Trim().ToUpperInvariant();
         }
 
-        // Normalize phone numbers for duplicate checks
+        // normalize phone
         private static string NormalizePhone(string value)
         {
             return new string(value.Where(char.IsDigit).ToArray());
         }
 
-        // Create a random salt for password hashing
+        // create salt
         private static string CreateSalt()
         {
             byte[] saltBytes = RandomNumberGenerator.GetBytes(16);
             return Convert.ToBase64String(saltBytes);
         }
 
-        // Hash the password with PBKDF2 so only hash is stored
+        // hash password
         private static string HashPassword(string password, string salt)
         {
             byte[] saltBytes = Convert.FromBase64String(salt);

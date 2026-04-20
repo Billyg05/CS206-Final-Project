@@ -2,7 +2,7 @@ namespace HairSalonManagementApp
 {
     public partial class frmLogin : Form
     {
-        // Login form setup: wire the buttons once when the form opens
+        // form setup
         public frmLogin()
         {
             InitializeComponent();
@@ -10,7 +10,7 @@ namespace HairSalonManagementApp
             btnExit.Click += btnExit_Click;
         }
 
-        // Login button: validate input, authenticate the employee, and open the dashboard
+        // login click
         private void btnLogin_Click(object? sender, EventArgs e)
         {
             if (!Validator.TryGetUsername(txtUsername.Text, out string username, out string errorMessage))
@@ -50,7 +50,7 @@ namespace HairSalonManagementApp
             }
         }
 
-        // Exit button: close the application from the login screen
+        // exit click
         private void btnExit_Click(object? sender, EventArgs e)
         {
             Close();

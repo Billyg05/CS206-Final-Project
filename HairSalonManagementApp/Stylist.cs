@@ -7,10 +7,12 @@ namespace HairSalonManagementApp
         public string Specialty { get; set; } = "";
         public bool IsActive { get; set; }
 
+        // blank ctor
         public Stylist()
         {
         }
 
+        // full ctor
         public Stylist(int stylistId, string name, string specialty, bool isActive)
         {
             StylistId = stylistId;
@@ -19,6 +21,7 @@ namespace HairSalonManagementApp
             IsActive = isActive;
         }
 
+        // list text
         public override string ToString()
         {
             return Name;

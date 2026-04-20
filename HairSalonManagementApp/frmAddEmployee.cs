@@ -2,7 +2,7 @@ namespace HairSalonManagementApp
 {
     public partial class frmAddEmployee : Form
     {
-        // Employee form setup: wire the buttons used for account creation.
+        // form setup
         public frmAddEmployee()
         {
             InitializeComponent();
@@ -11,7 +11,7 @@ namespace HairSalonManagementApp
             btnBack.Click += btnBack_Click;
         }
 
-        // Save button: validate the employee fields and create the login account.
+        // save click
         private void btnSave_Click(object? sender, EventArgs e)
         {
             if (!Validator.TryGetEmployeeName(txtEmployeeName.Text, out string fullName, out string errorMessage))
@@ -57,19 +57,19 @@ namespace HairSalonManagementApp
             }
         }
 
-        // Clear button: wipe the current employee entry fields.
+        // clear click
         private void btnClear_Click(object? sender, EventArgs e)
         {
             ClearForm();
         }
 
-        // Back button: close the employee form without saving.
+        // back click
         private void btnBack_Click(object? sender, EventArgs e)
         {
             Close();
         }
 
-        // Reset all employee account fields back to blank.
+        // clear form
         private void ClearForm()
         {
             txtEmployeeName.Clear();

@@ -2,7 +2,7 @@ namespace HairSalonManagementApp
 {
     public partial class frmDashboard : Form
     {
-        // Dashboard setup: wire navigation buttons and show the latest summary totals.
+        // form setup
         public frmDashboard()
         {
             InitializeComponent();
@@ -15,7 +15,7 @@ namespace HairSalonManagementApp
             LoadSummary();
         }
 
-        // Refresh the dashboard summary labels from the saved data lists.
+        // load summary
         private void LoadSummary()
         {
             lblCustomerCount.Text = SalonDB.Customers.Count.ToString();
@@ -24,7 +24,7 @@ namespace HairSalonManagementApp
             lblRevenue.Text = SalonDB.GetTotalRevenue().ToString("C");
         }
 
-        // Add Customer button: open the customer entry form.
+        // add customer click
         private void btnAddCustomer_Click(object? sender, EventArgs e)
         {
             using (frmAddCustomer addCustomerForm = new frmAddCustomer())
@@ -35,7 +35,7 @@ namespace HairSalonManagementApp
             LoadSummary();
         }
 
-        // Add Employee button: open the employee account creation form.
+        // add employee click
         private void btnAddEmployee_Click(object? sender, EventArgs e)
         {
             using (frmAddEmployee addEmployeeForm = new frmAddEmployee())
@@ -44,7 +44,7 @@ namespace HairSalonManagementApp
             }
         }
 
-        // Book Appointment button: open the appointment entry form.
+        // book appointment click
         private void btnBookAppointment_Click(object? sender, EventArgs e)
         {
             using (frmBookAppointment bookAppointmentForm = new frmBookAppointment())
@@ -56,7 +56,7 @@ namespace HairSalonManagementApp
             }
         }
 
-        // Manage Records button: open the appointment search/edit/delete screen.
+        // manage records click
         private void btnManageRecords_Click(object? sender, EventArgs e)
         {
             using (frmManageRecords manageRecordsForm = new frmManageRecords())
@@ -67,7 +67,7 @@ namespace HairSalonManagementApp
             LoadSummary();
         }
 
-        // Reports button: open the summary and totals screen.
+        // reports click
         private void btnReports_Click(object? sender, EventArgs e)
         {
             using (frmReports reportsForm = new frmReports())
@@ -76,7 +76,7 @@ namespace HairSalonManagementApp
             }
         }
 
-        // Logout button: close the dashboard and return to the login form.
+        // logout click
         private void btnLogout_Click(object? sender, EventArgs e)
         {
             Close();

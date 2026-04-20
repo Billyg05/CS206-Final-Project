@@ -2,7 +2,7 @@ namespace HairSalonManagementApp
 {
     public partial class frmManageRecords : Form
     {
-        // Records form setup: wire action buttons and load the filters/grid once.
+        // form setup
         public frmManageRecords()
         {
             InitializeComponent();
@@ -18,7 +18,7 @@ namespace HairSalonManagementApp
             LoadAppointments();
         }
 
-        // Fill the service filter drop-down, including the "all services" option.
+        // load filters
         private void LoadServiceFilter()
         {
             cmbFilterServices.Items.Clear();
@@ -33,7 +33,7 @@ namespace HairSalonManagementApp
             dtpFilterDate.Checked = false;
         }
 
-        // Load the appointment grid using the current search and filter controls.
+        // load grid
         private void LoadAppointments()
         {
             int? serviceId = null;
@@ -68,13 +68,13 @@ namespace HairSalonManagementApp
             }
         }
 
-        // Search button: reload the grid with the current filter values.
+        // search click
         private void btnSearch_Click(object? sender, EventArgs e)
         {
             LoadAppointments();
         }
 
-        // Reset button: clear every filter and show the full appointment list again.
+        // reset click
         private void btnReset_Click(object? sender, EventArgs e)
         {
             txtSearch.Clear();
@@ -83,7 +83,7 @@ namespace HairSalonManagementApp
             LoadAppointments();
         }
 
-        // Edit button: open the selected appointment in the booking form.
+        // edit click
         private void btnEdit_Click(object? sender, EventArgs e)
         {
             Appointment? appointment = GetSelectedAppointment();
@@ -103,7 +103,7 @@ namespace HairSalonManagementApp
             }
         }
 
-        // Delete button: remove the selected appointment after confirmation.
+        // delete click
         private void btnDelete_Click(object? sender, EventArgs e)
         {
             Appointment? appointment = GetSelectedAppointment();
@@ -121,20 +121,20 @@ namespace HairSalonManagementApp
             }
         }
 
-        // Refresh button: reload filters and data from the current saved lists.
+        // refresh click
         private void btnRefresh_Click(object? sender, EventArgs e)
         {
             LoadServiceFilter();
             LoadAppointments();
         }
 
-        // Back button: close the records screen.
+        // back click
         private void btnBack_Click(object? sender, EventArgs e)
         {
             Close();
         }
 
-        // Read the appointment ID from the selected grid row and find that record in memory.
+        // selected appointment
         private Appointment? GetSelectedAppointment()
         {
             if (dgvAppointments.CurrentRow?.Cells[0].Value == null)

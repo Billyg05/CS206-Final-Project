@@ -9,12 +9,12 @@ namespace HairSalonManagementApp
         public string PasswordHash { get; set; } = "";
         public bool IsActive { get; set; }
 
-        // Empty constructor for object initializers and file loading.
+        // blank ctor
         public Employee()
         {
         }
 
-        // Constructor used when a full employee record is loaded from storage.
+        // full ctor
         public Employee(int employeeId, string fullName, string username, string passwordSalt, string passwordHash, bool isActive)
         {
             EmployeeId = employeeId;
@@ -25,7 +25,7 @@ namespace HairSalonManagementApp
             IsActive = isActive;
         }
 
-        // Display text used if employee records are shown in lists later.
+        // list text
         public override string ToString()
         {
             return FullName + " (" + Username + ")";

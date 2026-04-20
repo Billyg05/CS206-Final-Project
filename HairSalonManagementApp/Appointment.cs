@@ -11,12 +11,12 @@ namespace HairSalonManagementApp
         public decimal TotalCost { get; set; }
         public string Notes { get; set; } = "";
 
-        // Empty constructor for object initializers and file loading
+        // blank ctor
         public Appointment()
         {
         }
 
-        // Constructor used when a full appointment record is loaded from storage
+        // full ctor
         public Appointment(int appointmentId, int customerId, int serviceId, int stylistId, DateTime appointmentDate, string status, decimal totalCost, string notes)
         {
             AppointmentId = appointmentId;
@@ -29,7 +29,7 @@ namespace HairSalonManagementApp
             Notes = notes;
         }
 
-        // Short display text for debugging or simple list output
+        // list text
         public override string ToString()
         {
             return "Appointment " + AppointmentId.ToString();

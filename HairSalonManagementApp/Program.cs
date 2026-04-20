@@ -2,7 +2,7 @@ namespace HairSalonManagementApp
 {
     internal static class Program
     {
-        // Main startup: initialize WinForms, load saved data, and open the login form.
+        // app start
         [STAThread]
         static void Main()
         {

@@ -8,10 +8,12 @@ namespace HairSalonManagementApp
         public string Category { get; set; } = "";
         public string Description { get; set; } = "";
 
+        // blank ctor
         public Service()
         {
         }
 
+        // full ctor
         public Service(int serviceId, string serviceName, decimal price, string category, string description = "")
         {
             ServiceId = serviceId;
@@ -21,6 +23,7 @@ namespace HairSalonManagementApp
             Description = description;
         }
 
+        // list text
         public override string ToString()
         {
             return ServiceName + " - " + Price.ToString("C");

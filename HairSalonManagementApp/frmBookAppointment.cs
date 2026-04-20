@@ -4,13 +4,13 @@ namespace HairSalonManagementApp
     {
         private readonly Appointment? currentAppointment;
 
-        // Default constructor: open the form in "new appointment" mode.
+        // new mode
         public frmBookAppointment()
             : this(null)
         {
         }
 
-        // Main constructor: support both new appointments and editing existing ones.
+        // form setup
         public frmBookAppointment(Appointment? appointment)
         {
             InitializeComponent();
@@ -41,7 +41,7 @@ namespace HairSalonManagementApp
             }
         }
 
-        // Load the customer, service, and stylist lists used by the drop-down controls.
+        // load lists
         private void LoadLookupLists()
         {
             LoadCustomers();
@@ -49,7 +49,7 @@ namespace HairSalonManagementApp
             LoadStylists();
         }
 
-        // Fill the customer drop-down with every saved customer.
+        // load customers
         private void LoadCustomers()
         {
             cmbCustomer.Items.Clear();
@@ -69,7 +69,7 @@ namespace HairSalonManagementApp
             }
         }
 
-        // Fill the service drop-down with the saved service list.
+        // load services
         private void LoadServices()
         {
             cmbServices.Items.Clear();
@@ -85,7 +85,7 @@ namespace HairSalonManagementApp
             }
         }
 
-        // Fill the stylist drop-down with active employees who can take appointments.
+        // load stylists
         private void LoadStylists()
         {
             cmbStylist.Items.Clear();
@@ -101,7 +101,7 @@ namespace HairSalonManagementApp
             }
         }
 
-        // Editing mode: load the saved appointment values back into the form controls.
+        // load edit data
         private void LoadAppointmentForEdit()
         {
             SelectCustomer(currentAppointment!.CustomerId);
@@ -114,7 +114,7 @@ namespace HairSalonManagementApp
             txtPrice.Text = currentAppointment.TotalCost.ToString("0.00");
         }
 
-        // Match the appointment's saved customer ID to the correct customer in the drop-down.
+        // select customer
         private void SelectCustomer(int customerId)
         {
             for (int i = 0; i < cmbCustomer.Items.Count; i++)
@@ -128,7 +128,7 @@ namespace HairSalonManagementApp
             }
         }
 
-        // Match the appointment's saved service ID to the correct service in the drop-down.
+        // select service
         private void SelectService(int serviceId)
         {
             for (int i = 0; i < cmbServices.Items.Count; i++)
@@ -142,7 +142,7 @@ namespace HairSalonManagementApp
             }
         }
 
-        // Match the appointment's saved stylist ID to the correct stylist in the drop-down.
+        // select stylist
         private void SelectStylist(int stylistId)
         {
             for (int i = 0; i < cmbStylist.Items.Count; i++)
@@ -156,7 +156,7 @@ namespace HairSalonManagementApp
             }
         }
 
-        // Customer drop-down: show the selected customer's phone number as read-only context.
+        // customer changed
         private void cmbCustomer_SelectedIndexChanged(object? sender, EventArgs e)
         {
             if (cmbCustomer.SelectedItem is Customer customer)
@@ -169,7 +169,7 @@ namespace HairSalonManagementApp
             }
         }
 
-        // Service drop-down: keep the price box tied to the selected service price.
+        // service changed
         private void cmbServices_SelectedIndexChanged(object? sender, EventArgs e)
         {
             if (cmbServices.SelectedItem is Service service)
@@ -182,7 +182,7 @@ namespace HairSalonManagementApp
             }
         }
 
-        // New button: let the user add a customer without leaving the booking workflow.
+        // add customer click
         private void btnAddCustomer_Click(object? sender, EventArgs e)
         {
             int previousMaxCustomerId = SalonDB.Customers.Count == 0 ? 0 : SalonDB.Customers.Max(c => c.CustomerId);
@@ -194,7 +194,7 @@ namespace HairSalonManagementApp
 
             LoadCustomers();
 
-            // Pick the newest customer automatically so the user can keep booking right away.
+            // select newest customer
             Customer? newCustomer = SalonDB.Customers
                 .Where(c => c.CustomerId > previousMaxCustomerId)
                 .OrderByDescending(c => c.CustomerId)
@@ -206,7 +206,7 @@ namespace HairSalonManagementApp
             }
         }
 
-        // Save button: validate the selections, build the appointment record, and store it.
+        // save click
         private void btnSave_Click(object? sender, EventArgs e)
         {
             if (cmbCustomer.SelectedItem is not Customer customer)
@@ -233,12 +233,19 @@ namespace HairSalonManagementApp
                 return;
             }
 
-            // Combine the separate date and time pickers into one appointment timestamp.
+            // combine date time
             DateTime appointmentDate = dtpDate.Value.Date + dtpTime.Value.TimeOfDay;
+            TimeSpan appointmentTime = appointmentDate.TimeOfDay;
 
             if (currentAppointment == null && appointmentDate < DateTime.Now)
             {
                 Validator.ShowValidationError("Appointment date and time cannot be in the past.", dtpDate);
+                return;
+            }
+
+            if (appointmentTime < new TimeSpan(9, 0, 0) || appointmentTime > new TimeSpan(18, 0, 0))
+            {
+                Validator.ShowValidationError("Appointments must be booked between 9:00 AM and 6:00 PM.", dtpTime);
                 return;
             }
 
@@ -264,19 +271,19 @@ namespace HairSalonManagementApp
             }
         }
 
-        // Clear button: reset the booking form back to its normal default state.
+        // clear click
         private void btnClear_Click(object? sender, EventArgs e)
         {
             ResetForm();
         }
 
-        // Back button: close the booking form without saving new changes.
+        // back click
         private void btnBack_Click(object? sender, EventArgs e)
         {
             Close();
         }
 
-        // Reset the form to the standard "new appointment" values.
+        // reset form
         private void ResetForm()
         {
             if (cmbCustomer.Items.Count > 0)
